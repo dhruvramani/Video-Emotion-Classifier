@@ -1,4 +1,5 @@
 import os
+import sys
 import imageio
 import numpy as np
 
@@ -16,11 +17,13 @@ class Data(object):
 
     def get_frames(self, file_name):
         vid, frame_count = self.read_video(file_name)
-        single_frame, frame = frame_count / self.config.frames, 0
-        frames = []
+        if(frame_count > self.config.frames):
+            single_frame = int(frame_count / self.config.frames)
+        else : single_frame = 1
+        frame, frames = 0, []
         while(frame < frame_count):
             frames.append(vid.get_data(frame))
-            frame += single_frame
+            frame += int(single_frame)
         if(frame > frame_count):
             frames.append(vid.get_data(frame_count - 1))
         return np.asarray(frames, dtype=np.float32)

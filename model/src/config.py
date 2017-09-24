@@ -18,6 +18,6 @@ class Config(object):
     def set_paths(self):
         project_path = utils.path_exists(self.codebase_root_path)
         data_path = utils.path_exists(os.path.join(self.codebase_root_path, "../data", "videos"))
-        cascade_path = utils.path_exists(os.path.join(data_path, "cascades"))
+        cascade_path = utils.path_exists(os.path.join(self.codebase_root_path, "../data", "cascades"))
         ckptdir_path = utils.path_exists(os.path.join(self.codebase_root_path, "checkpoint"))
         return project_path, data_path, cascade_path, ckptdir_path
