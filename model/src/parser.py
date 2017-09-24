@@ -7,6 +7,7 @@ class Parser(object):
         parser.add_argument("--project", default="VideoEmbedding", help="Project Folder")
         parser.add_argument("--cascade", default="haarcascade.xml", help="Cascade for OpenCV CLM")
         parser.add_argument("--frames", default=100, type=int, help="Number of Frames Per Video")
+        parser.add_argument("--dropout", default=0.5, type=float, help="Dropout Keep")
         parser.add_argument("--batch_size", default=30, type=int, help="Number of Videos in a Batch")
         parser.add_argument("--max_epochs", default=100, type=int, help="Maximum Number of Epochs")
         parser.add_argument("--debug", default=False, type=self.str_to_bool, help="Debug Mode")
