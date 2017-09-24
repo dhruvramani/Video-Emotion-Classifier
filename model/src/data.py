@@ -1,3 +1,4 @@
+import os
 import imageio
 import numpy as np
 
@@ -7,7 +8,7 @@ class Data(object):
         self.batch_count = 1
 
     def read_video(self, file_name):
-        vid = imageio.get_reader(file_name, 'ffmpeg')
+        vid = imageio.get_reader(os.path.join(self.config.data_path, file_name), 'ffmpeg')
         frame_count = 0
         for _ in vid:
             frame_count += 1
