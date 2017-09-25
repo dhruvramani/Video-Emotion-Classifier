@@ -7,6 +7,7 @@ class Config(object):
         self.project_name = args.project
         self.batch_size = args.batch_size
         self.dropout = args.dropout
+        self.optimizer = args.optimizer
         self.max_epochs = args.max_epochs
         self.cascade = args.cascade
         self.frames = args.frames
