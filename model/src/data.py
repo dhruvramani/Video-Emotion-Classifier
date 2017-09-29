@@ -26,7 +26,7 @@ class Data(object):
             frame += int(single_frame)
         if(frame > frame_count):
             frames.append(vid.get_data(frame_count - 1))
-        return np.asarray(frames, dtype=np.float32)
+        return frames
 
     def create_onehot(self, vector):
         one_hot = np.zeros((vector.size, vector.max() + 1))

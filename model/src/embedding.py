@@ -1,17 +1,26 @@
 import os
-import cv2
-import numpy as np
 
-class Embedding(object):
-    def __init__(self, config, data):
-        self.config = config
-        self.data = data
+FRAMES_DIR = "/root/shared/VideoEmbedding/data/frames/"
+ALIGNED_DIR = "/root/shared/VideoEmbedding/data/aligned/"
+FEATURES_DIR = "/root/shared/VideoEmbedding/data/features/"
+OPENFACE_DIR = "/root/openface/"
 
-    def detect_face(self, image):
-        gray_scale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        gray_scale = np.asarray(gray_scale, dtype='uint8')
-        faceCascade = cv2.CascadeClassifier(os.path.join(self.config.cascade_path , self.config.cascade))
-        faces = faceCascade.detectMultiScale(gray_scale, scaleFactor=1.08, minNeighbors=1)
-        if(str(type(faces)) == "<class 'tuple'>"):
-            return np.zeros((32, 32))
-        return gray_scale[faces[0, 1]: faces[0, 1] + faces[0, 2], faces[0, 0]: faces[0, 0] + faces[0, 3]].shape
+for video in os.listdir(FRAMES_DIR):
+    frames = os.listdir(FRAMES_DIR + video)
+    n_frames = int(len(frames)/50)
+    count, dont_delete = 0, list()
+    while(count < 50 && count < len(frames)):
+        dont_delete.append(frames[count])
+        count += n_frames
+    for frame in frames:
+        if frame not in dont_delete:
+            os.remove(FRAMES_DIR +  video +  frame)
+    while count < len(frames):
+        if frames[count] not in dont_delete:
+            os.remove(FRAMES_DIR + video + frame)
+        count += 1
+    
+    os.system("for N in {1..8}; do " + OPENFACE_DIR + "util/align-dlib.py " + FRAMES_DIR + video + " align outerEyesAndNose " + ALIGNED_DIR  + " --size 96 & done")
+    os.system(OPENFACE_DIR + "batch-represent/main.lua -outDir " + FEATURES_DIR + " -data " + ALIGNED_DIR)
+
+
