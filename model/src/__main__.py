@@ -6,6 +6,9 @@ from config import Config
 from network import Network
 from embeddng import Embedding
 
-class Model(object):
-    def __init__(self, config):
-        self.config = config
+def main_model():
+    args = Parser().get_parser().parse_args()
+    config = Config(args)
+    data = Data(config)
+    net = Network(config)
+    # net.run_model()
