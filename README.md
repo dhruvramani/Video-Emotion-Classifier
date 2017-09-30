@@ -6,7 +6,7 @@ Install the required Python Modules :
 pip3 install -r requirements.txt
 ```
 Install the required plugin to run the script :
-```shell
+```python
 python3  
 import imageio
 imageio.plugins.ffmpeg.download()

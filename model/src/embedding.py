@@ -9,7 +9,7 @@ for video in os.listdir(FRAMES_DIR):
     frames = os.listdir(FRAMES_DIR + video)
     n_frames = int(len(frames)/50)
     count, dont_delete = 0, list()
-    while(count < 50 && count < len(frames)):
+    while(count < 50 and count < len(frames)):
         dont_delete.append(frames[count])
         count += n_frames
     for frame in frames:
